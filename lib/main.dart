@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:lab_request_admin/views/check_availability.dart';
+import 'package:lab_request_admin/views/main_screens/check_availability.dart';
 
-import 'views/home.dart';
-import 'views/manage_request.dart';
+import 'views/main_screens/home.dart';
+import 'views/main_screens/manage_request.dart';
 import 'views/splash.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Locking the screen orientation to portrait
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {

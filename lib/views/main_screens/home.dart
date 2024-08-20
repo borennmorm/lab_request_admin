@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../components/lab_session_card.dart';
-import '../components/my_drawer.dart';
-import '../components/overview_card.dart';
-import 'settings.dart';
+import '../../components/lab_session_card.dart';
+import '../../components/my_drawer.dart';
+import '../../components/overview_card.dart';
+import '../settings.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

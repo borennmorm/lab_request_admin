@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../components/my_drawer.dart';
-import '../components/request_card.dart';
-import 'settings.dart';
+import '../../components/my_drawer.dart';
+import '../../components/request_card.dart';
+import '../settings.dart';
 
 class ManageRequest extends StatefulWidget {
   const ManageRequest({super.key});

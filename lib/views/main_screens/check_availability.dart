@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../components/my_drawer.dart';
-import 'settings.dart';
+import '../../components/my_drawer.dart';
+import '../settings.dart';
 
 class CheckAvailability extends StatefulWidget {
   const CheckAvailability({super.key});

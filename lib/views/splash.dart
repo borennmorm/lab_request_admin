@@ -1,8 +1,36 @@
 import 'package:flutter/material.dart';
-import 'dart:ui'; 
+import 'dart:ui';
+import 'dart:async';
+import 'package:get/get.dart';
+import 'package:lab_request_admin/views/login.dart';
 
-class Splash extends StatelessWidget {
+import '../main.dart'; // Import GetX
+
+class Splash extends StatefulWidget {
   const Splash({super.key});
+
+  @override
+  _SplashState createState() => _SplashState();
+}
+
+class _SplashState extends State<Splash> {
+  @override
+  void initState() {
+    super.initState();
+
+    // Simulate a delay of 3 seconds and then navigate to the appropriate page
+    Timer(const Duration(seconds: 3), () {
+      bool userLoggedIn = false; // Replace with actual login check
+
+      if (userLoggedIn) {
+        // Navigate to HomePage
+        Get.offAll(const MyBottomNav());
+      } else {
+        // Navigate to LoginPage
+        Get.offAll(const Login());
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

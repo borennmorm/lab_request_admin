@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../components/lab_session_card.dart';
 import '../components/my_drawer.dart';
 import '../components/overview_card.dart';
-import '../models/overview_model.dart';
+import 'settings.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,12 +17,6 @@ class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late Future<Map<String, int>> overviewData;
 
-  @override
-  void initState() {
-    super.initState();
-    OverviewModel model = OverviewModel();
-    overviewData = model.fetchData();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +31,11 @@ class _HomeState extends State<Home> {
         ),
         title: const Text('Morm Borenn'),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
+          IconButton(
+              onPressed: () {
+                Get.to(const Settings());
+              },
+              icon: const Icon(Icons.settings)),
         ],
       ),
       // Drawer
@@ -51,7 +50,10 @@ class _HomeState extends State<Home> {
               // Overview
               const Text(
                 'Overview',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
 
               // Grid of 2x2 cards
@@ -87,21 +89,15 @@ class _HomeState extends State<Home> {
               ),
 
               // Labs
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Labs',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text('View All'),
-                  )
-                ],
+              const Text(
+                'Labs',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               SizedBox(
-                height: 330,
+                height: 250,
                 child: Column(
                   children: [
                     LabSessionCard(

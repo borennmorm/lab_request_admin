@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
+import '../main.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -57,11 +59,22 @@ class Login extends StatelessWidget {
                 ),
               ),
               // button
-              CustomButton(
-                color: Colors.black,
-                onPressed: () {},
-                text: 'Login',
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomButton(
+                      color: Colors.black,
+                      onPressed: () {
+                        Get.offAll(
+                          const MyBottomNav(),
+                        );
+                      },
+                      text: 'Login',
+                    ),
+                  )
+                ],
               ),
+
               const Spacer(),
               // Don't have an Account yet? Contact Dev
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [

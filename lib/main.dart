@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:lab_request_admin/views/check_availability.dart';
-import 'package:lab_request_admin/views/login.dart';
-import 'package:lab_request_admin/views/splash.dart';
 
 import 'views/home.dart';
 import 'views/manage_request.dart';
-import 'views/request_detail.dart';
+import 'views/splash.dart';
 
 void main() {
-  runApp(const MainApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Locking the screen orientation to portrait
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(const MainApp());
+  });
 }
 
 class MainApp extends StatelessWidget {
@@ -16,9 +22,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RequestDetail(),
+      home: Splash(),
     );
   }
 }

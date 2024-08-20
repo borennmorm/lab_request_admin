@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../components/my_drawer.dart';
 import '../components/request_card.dart';
+import 'settings.dart';
 
 class ManageRequest extends StatefulWidget {
   const ManageRequest({super.key});
@@ -26,7 +28,11 @@ class _ManageRequestState extends State<ManageRequest> {
         ),
         title: const Text('Morm Borenn'),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
+          IconButton(
+              onPressed: () {
+                Get.to(const Settings());
+              },
+              icon: const Icon(Icons.settings)),
         ],
       ),
       // Drawer
@@ -40,7 +46,10 @@ class _ManageRequestState extends State<ManageRequest> {
               // new request
               Text(
                 'New Request',
-                style: TextStyle(fontSize: 15),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               RequestCard(
                 date: 'Mon, 19 Aug 2024',
@@ -71,7 +80,10 @@ class _ManageRequestState extends State<ManageRequest> {
               // response
               Text(
                 'Response',
-                style: TextStyle(fontSize: 15),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               RequestCard(
                 date: 'Mon, 19 Aug 2024',
@@ -102,7 +114,10 @@ class _ManageRequestState extends State<ManageRequest> {
               // missed response
               Text(
                 'Missed Response',
-                style: TextStyle(fontSize: 15),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Text(
                 'No missing response',

@@ -137,6 +137,92 @@ class _CheckAvailabilityState extends State<CheckAvailability> {
                 ),
               ],
             ),
+            // First Container
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.pink[100],
+                border: Border.all(color: Colors.red, width: 2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '07:00 - 08:30 AM',
+                    style: TextStyle(color: Colors.black54),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Rong Thida',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 16),
+            // Second Container
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.green[100],
+                border: Border.all(color: Colors.green, width: 1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '07:00 - 08:30 AM',
+                    style: TextStyle(color: Colors.green),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Free',
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 16),
+            // Third Container
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.pink[100],
+                border: Border.all(color: Colors.red, width: 1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '07:00 - 08:30 AM',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Rong Thida',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

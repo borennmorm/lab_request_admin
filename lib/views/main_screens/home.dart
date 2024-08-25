@@ -17,7 +17,6 @@ class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late Future<Map<String, int>> overviewData;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +28,8 @@ class _HomeState extends State<Home> {
             _scaffoldKey.currentState?.openDrawer();
           },
         ),
-        title: const Text('Morm Borenn'),
+        title: const Text('Dashboard'),
+        centerTitle: false,
         actions: [
           IconButton(
               onPressed: () {
@@ -56,80 +56,21 @@ class _HomeState extends State<Home> {
                 ),
               ),
 
-              // Grid of 2x2 cards
-              SizedBox(
-                height: 330, // Fixed height for GridView
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  children: [
-                    OverviewCard(
-                      title: 'Total',
-                      number: '05',
-                      color: Colors.amber[700]!,
-                    ),
-                    const OverviewCard(
-                      title: 'Approved',
-                      number: '05',
-                      color: Colors.green,
-                    ),
-                    const OverviewCard(
-                      title: 'Rejected',
-                      number: '05',
-                      color: Colors.red,
-                    ),
-                    const OverviewCard(
-                      title: 'Upcoming Sessions',
-                      number: '05',
-                      color: Colors.blue,
-                    ),
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  OverviewCard(
+                    title: 'Total',
+                    number: '05',
+                    color: Colors.green[700]!,
+                  ),
+                  OverviewCard(
+                    title: 'Pending Approve',
+                    number: '05',
+                    color: Colors.red[700]!,
+                  ),
+                ],
               ),
-
-              // Labs
-              const Text(
-                'Labs',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 250,
-                child: Column(
-                  children: [
-                    LabSessionCard(
-                      backgroundColor: Colors.amber[700]!,
-                      labNumber: '01',
-                      labTitle: 'Labs 013',
-                      lineBarColor: Colors.amber[700]!,
-                      sessionText: '2/6',
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const LabSessionCard(
-                      backgroundColor: Colors.green,
-                      labNumber: '02',
-                      labTitle: 'Labs 014',
-                      lineBarColor: Colors.green,
-                      sessionText: '2/6',
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const LabSessionCard(
-                      backgroundColor: Colors.red,
-                      labNumber: '03',
-                      labTitle: 'Labs 015',
-                      lineBarColor: Colors.red,
-                      sessionText: '2/6',
-                    ),
-                  ],
-                ),
-              )
             ],
           ),
         ),

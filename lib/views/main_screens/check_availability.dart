@@ -140,13 +140,13 @@ class _CheckAvailabilityState extends State<CheckAvailability> {
             // First Container
             Container(
               width: double.infinity,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.pink[100],
                 border: Border.all(color: Colors.red, width: 2),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -165,17 +165,17 @@ class _CheckAvailabilityState extends State<CheckAvailability> {
                 ],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Second Container
             Container(
               width: double.infinity,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.green[100],
                 border: Border.all(color: Colors.green, width: 1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -194,17 +194,17 @@ class _CheckAvailabilityState extends State<CheckAvailability> {
                 ],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Third Container
             Container(
               width: double.infinity,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.pink[100],
                 border: Border.all(color: Colors.red, width: 1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(

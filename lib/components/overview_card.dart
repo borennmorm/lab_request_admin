@@ -4,28 +4,28 @@ class OverviewCard extends StatelessWidget {
   final String title;
   final String number;
   final Color color;
-  final double width; // Added width property
-  final double height; // Added height property
 
   const OverviewCard({
     super.key,
     required this.title,
     required this.number,
     required this.color,
-    this.width = 185,
-    this.height = 100,
   });
 
   @override
   Widget build(BuildContext context) {
+    // Calculate the width of the card based on the screen size
+    double cardWidth = MediaQuery.of(context).size.width / 2.5;
+    double cardHeight = MediaQuery.of(context).size.height / 8;
+
     return Card(
-      elevation: 4,
+      elevation: 0,
       color: color,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: SizedBox(
-        width: width, // Use the width property
-        height: height, // Use the height property
-        child: Container(
+        width: cardWidth,
+        height: cardHeight,
+        child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,16 +34,20 @@ class OverviewCard extends StatelessWidget {
               Text(
                 title,
                 style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
-              Text(
-                number,
-                style: const TextStyle(
+              Flexible(
+                child: Text(
+                  number,
+                  style: const TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ],
           ),

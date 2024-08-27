@@ -1,322 +1,248 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../components/my_button.dart';
 
 class RequestDetail extends StatefulWidget {
-  const RequestDetail({super.key});
+  final String name;
+
+  const RequestDetail({super.key, required this.name});
 
   @override
-  _RequestDetailState createState() => _RequestDetailState();
+  State<RequestDetail> createState() => _RequestDetailState();
 }
 
 class _RequestDetailState extends State<RequestDetail> {
-  final requestDetails = {
-    'Lab': '013',
-    'Date': 'Mon, 19 Aug 2024',
-    'Phone': '0912747332',
-    'Major': 'Accounting',
-    'Subject': 'Computer Practice',
-    'Software Use': 'Ms Excel',
-    'Student Quantity': '>50',
-    'Sessions': '2',
-    'Additional': 'I want ...',
-  };
-
-  final List<String> timeSlots = [
-    '07:00 - 08:30 AM',
-    '08:45 - 10:15 AM',
-    '10:30 - 12:00 PM',
-    '12:15 - 01:45 PM',
-    '02:00 - 03:30 PM',
-    '03:45 - 05:15 PM'
-  ];
-
-  // Track the state of approval/rejection
-  List<String> approvalStatus = [];
-  List<bool> selectedForApproval = [];
-  List<bool> selectedForRejection = [];
-
-  @override
-  void initState() {
-    super.initState();
-    int slotCount = _isWeekend() ? 6 : 3;
-    approvalStatus = List<String>.filled(slotCount, 'pending');
-    selectedForApproval = List<bool>.filled(slotCount, false);
-    selectedForRejection = List<bool>.filled(slotCount, false);
-  }
-
-  bool _isWeekend() {
-    final now = DateTime.now();
-    return now.weekday == DateTime.saturday || now.weekday == DateTime.sunday;
-  }
-
-  void updateApprovalStatusForSelected() {
-    setState(() {
-      for (int i = 0; i < approvalStatus.length; i++) {
-        if (selectedForApproval[i]) {
-          approvalStatus[i] = 'approved';
-        } else if (selectedForRejection[i]) {
-          _showRejectionDialog(i);
-        }
-      }
-    });
-  }
-
-  void _showRejectionDialog(int index) async {
-    String rejectionDescription = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        String tempDescription = '';
-        return AlertDialog(
-          title: const Text('Enter Rejection Reason'),
-          content: TextField(
-            onChanged: (value) {
-              tempDescription = value;
-            },
-            decoration: const InputDecoration(hintText: "Reason for rejection"),
-          ),
-          actions: [
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop('');
-              },
-            ),
-            TextButton(
-              child: const Text('Submit'),
-              onPressed: () {
-                Navigator.of(context).pop(tempDescription);
-              },
-            ),
-          ],
-        );
-      },
-    );
-
-    if (rejectionDescription.isNotEmpty) {
-      setState(() {
-        approvalStatus[index] = 'rejected';
-      });
-    }
-  }
-
-  void resetStatus() {
-    setState(() {
-      approvalStatus = List<String>.filled(approvalStatus.length, 'pending');
-      selectedForApproval = List<bool>.filled(approvalStatus.length, false);
-      selectedForRejection = List<bool>.filled(approvalStatus.length, false);
-    });
-  }
+  bool isRejected = false;
+  bool isApproved = false;
+  final TextEditingController _descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Morm Borenn'),
+        title: Text(widget.name.isNotEmpty ? widget.name : 'Unnamed Request'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: ListView(
-          children: [
-            // Request details
-            _buildRequestDetails(),
-            const SizedBox(height: 15),
-            // Approval title with reset button
-            _buildApprovalTitle(),
-            const SizedBox(height: 15),
-            // Approval cards
-            _buildApprovalCards(),
-            const SizedBox(height: 15),
-            _buildActionButtons(),
-          ],
-        ),
-      ),
-    );
-  }
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Lab Details
+              const Text(
+                'Lab Details',
+                style: TextStyle(fontSize: 18, color: Colors.blue),
+              ),
+              const SizedBox(height: 10),
+              const RowLab(
+                icon: CupertinoIcons.device_desktop,
+                labelText: 'Lab Name:',
+                resultText: 'Lab 014',
+              ),
+              const SizedBox(height: 10),
+              const RowLab(
+                icon: CupertinoIcons.calendar,
+                labelText: 'Request Date:',
+                resultText: '12 Aug 2024',
+              ),
+              const SizedBox(height: 10),
+              const RowLab(
+                icon: CupertinoIcons.clock,
+                labelText: 'Session Time:',
+                resultText: '07:00 - 08:30 AM',
+              ),
+              const SizedBox(height: 20),
 
-  Widget _buildRequestDetails() {
-    return Container(
-      padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: requestDetails.entries.map((entry) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 140,
-                  child: Text(
-                    '${entry.key}:',
-                    style: const TextStyle(fontSize: 17),
+              // Contact Information
+              const Text(
+                'Contact Information',
+                style: TextStyle(fontSize: 18, color: Colors.blue),
+              ),
+              const SizedBox(height: 10),
+              const RowLab(
+                icon: CupertinoIcons.phone,
+                labelText: 'Phone:',
+                resultText: '096712123',
+              ),
+              const SizedBox(height: 10),
+              const RowLab(
+                icon: CupertinoIcons.creditcard,
+                labelText: 'Teacher ID:',
+                resultText: 'TNUBB-012',
+              ),
+              const SizedBox(height: 10),
+              const RowLab(
+                icon: CupertinoIcons.building_2_fill,
+                labelText: 'Faculty:',
+                resultText: 'Seciene and Technology',
+              ),
+              const SizedBox(height: 10),
+              const RowLab(
+                icon: CupertinoIcons.square_stack_3d_up,
+                labelText: 'Major:',
+                resultText: 'Information Technology',
+              ),
+              const SizedBox(height: 10),
+              const RowLab(
+                icon: CupertinoIcons.chart_bar,
+                labelText: 'Generation:',
+                resultText: '18',
+              ),
+              const SizedBox(height: 20),
+
+              // Course Information
+              const Text(
+                'Course Information',
+                style: TextStyle(fontSize: 18, color: Colors.blue),
+              ),
+              const SizedBox(height: 10),
+              const RowLab(
+                icon: CupertinoIcons.book,
+                labelText: 'Course Name:',
+                resultText: 'Data Structure & Alorithm',
+              ),
+              const SizedBox(height: 10),
+              const RowLab(
+                icon: CupertinoIcons.device_laptop,
+                labelText: 'Software Requirements:',
+                resultText: 'VSCode',
+              ),
+              const SizedBox(height: 20),
+
+              // Session Details
+              const Text(
+                'Session Details',
+                style: TextStyle(fontSize: 18, color: Colors.blue),
+              ),
+              const SizedBox(height: 10),
+              const RowLab(
+                icon: CupertinoIcons.person_2,
+                labelText: 'Students: ',
+                resultText: '<40',
+              ),
+              const SizedBox(height: 10),
+              const RowLab(
+                icon: CupertinoIcons.doc_plaintext,
+                labelText: 'Additional: ',
+                resultText:
+                    'I need 2 speaks and a microphone. Make sure all the computer connected to internet. Thank you!',
+              ),
+              const Divider(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Checkbox row for approval and rejection
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: isApproved,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isApproved = value ?? false;
+                            if (isApproved) isRejected = false;
+                          });
+                        },
+                      ),
+                      const Text(
+                        'Approve',
+                        style: TextStyle(color: Colors.green),
+                      ),
+                      const SizedBox(width: 20),
+                      Checkbox(
+                        value: isRejected,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isRejected = value ?? false;
+                            if (isRejected) isApproved = false;
+                          });
+                        },
+                      ),
+                      const Text(
+                        'Reject',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    entry.value,
-                    style: const TextStyle(fontSize: 17),
+                  const SizedBox(height: 20),
+                  // Description text field
+                  const Text(
+                    'Description',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                ),
-              ],
-            ),
-          );
-        }).toList(),
-      ),
-    );
-  }
-
-  Widget _buildApprovalTitle() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Text(
-          'Approval',
-          style: TextStyle(fontSize: 17),
-        ),
-        IconButton(
-          icon: const Icon(Icons.refresh),
-          onPressed: resetStatus,
-          tooltip: 'Reset Status',
-        ),
-      ],
-    );
-  }
-
-  Widget _buildApprovalCards() {
-    return Column(
-      children: timeSlots.asMap().entries.map((entry) {
-        int index = entry.key;
-        if (!_isWeekend() && index >= 3) return Container();
-        String slot = entry.value;
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 10),
-          child: ApprovalCard(
-            timeSlot: slot,
-            status: approvalStatus[index],
-            isSelectedForApproval: selectedForApproval[index],
-            isSelectedForRejection: selectedForRejection[index],
-            onApprovalSelect: (bool? value) {
-              setState(() {
-                selectedForApproval[index] = value ?? false;
-                if (value == true) {
-                  selectedForRejection[index] = false;
-                }
-              });
-            },
-            onRejectionSelect: (bool? value) {
-              setState(() {
-                selectedForRejection[index] = value ?? false;
-                if (value == true) {
-                  selectedForApproval[index] = false;
-                }
-              });
-            },
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: _descriptionController,
+                    maxLines: 4,
+                    decoration: InputDecoration(
+                      hintText: 'Enter description here...',
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  // Submit button
+                  Center(
+                      child: CustomButton(
+                    color: Colors.blue,
+                    onPressed: () {},
+                    text: 'Submit',
+                  ))
+                ],
+              ),
+            ],
           ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget _buildActionButtons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        CustomButton(
-          color: Colors.green,
-          onPressed: updateApprovalStatusForSelected,
-          text: 'Submit',
         ),
-      ],
+      ),
     );
   }
 }
 
-class ApprovalCard extends StatelessWidget {
-  final String timeSlot;
-  final String status;
-  final bool isSelectedForApproval;
-  final bool isSelectedForRejection;
-  final ValueChanged<bool?> onApprovalSelect;
-  final ValueChanged<bool?> onRejectionSelect;
+class RowLab extends StatelessWidget {
+  final String labelText;
+  final String resultText;
+  final IconData icon;
 
-  const ApprovalCard({
+  const RowLab({
     super.key,
-    required this.timeSlot,
-    required this.status,
-    required this.isSelectedForApproval,
-    required this.isSelectedForRejection,
-    required this.onApprovalSelect,
-    required this.onRejectionSelect,
+    required this.labelText,
+    required this.resultText,
+    required this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
-    Color statusColor;
-    switch (status) {
-      case 'approved':
-        statusColor = Colors.green;
-        break;
-      case 'rejected':
-        statusColor = Colors.red;
-        break;
-      default:
-        statusColor = Colors.grey[700]!;
-    }
-
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.0),
-        border: Border.all(color: statusColor),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              timeSlot,
-              style: TextStyle(
-                color: statusColor,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(
+          icon,
+          size: 18,
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Expanded(
+          child: Text(
+            labelText,
+            style: const TextStyle(fontSize: 16),
           ),
-          const SizedBox(width: 10),
-          Column(
-            children: [
-              const Text('Approve'),
-              Checkbox(
-                value: isSelectedForApproval,
-                onChanged: onApprovalSelect,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(2),
-                ),
-                activeColor: Colors.green,
-              ),
-            ],
+        ),
+        const SizedBox(
+          width: 10, // Spacing between label and result
+        ),
+        Expanded(
+          child: Text(
+            resultText,
+            style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+            textAlign: TextAlign.start,
           ),
-          const SizedBox(width: 10),
-          Column(
-            children: [
-              const Text('Reject'),
-              Checkbox(
-                value: isSelectedForRejection,
-                onChanged: onRejectionSelect,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(2),
-                ),
-                activeColor: Colors.red,
-              ),
-            ],
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

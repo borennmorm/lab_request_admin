@@ -31,7 +31,8 @@ class _CheckAvailabilityState extends State<CheckAvailability> {
             _scaffoldKey.currentState?.openDrawer();
           },
         ),
-        title: const Text('Morm Borenn'),
+        title: const Text('Check Availability'),
+        centerTitle: false,
         actions: [
           IconButton(
               onPressed: () {

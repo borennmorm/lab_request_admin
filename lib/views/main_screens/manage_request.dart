@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../../components/approval_card.dart';
 import 'package:intl/intl.dart';
 import '../../components/my_drawer.dart';
-import '../request_detail.dart';
 import '../settings.dart';
 
 class ManageRequest extends StatefulWidget {
@@ -159,7 +158,9 @@ class _ManageRequestState extends State<ManageRequest> {
                 ),
                 const ApprovalsCard(name: 'Udom Leakana'),
                 const ApprovalsCard(name: 'Udom Wathana'),
-
+                const SizedBox(
+                  height: 20,
+                ),
                 // 08:50 - 10:20 AM
                 Row(
                   children: [
@@ -181,7 +182,9 @@ class _ManageRequestState extends State<ManageRequest> {
                   ],
                 ),
                 const ApprovalsCard(name: 'Udom Leakana'),
-
+                const SizedBox(
+                  height: 20,
+                ),
                 // 10:40 - 12:00 AM
                 Row(
                   children: [
@@ -203,7 +206,9 @@ class _ManageRequestState extends State<ManageRequest> {
                   ],
                 ),
                 const ApprovalsCard(name: 'Udom Leakana'),
-
+                const SizedBox(
+                  height: 20,
+                ),
                 // 01:00 - 02:30 PM
                 Row(
                   children: [
@@ -225,6 +230,9 @@ class _ManageRequestState extends State<ManageRequest> {
                   ],
                 ),
                 const ApprovalsCard(name: 'Udom Leakana'),
+                const SizedBox(
+                  height: 20,
+                ),
 
                 // 02:50 - 04:10 PM
                 Row(
@@ -237,6 +245,9 @@ class _ManageRequestState extends State<ManageRequest> {
                     const SizedBox(
                       width: 5,
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Text(
                       '02:50 - 04:10 PM',
                       style: TextStyle(
@@ -246,7 +257,10 @@ class _ManageRequestState extends State<ManageRequest> {
                     )
                   ],
                 ),
-                Text('None'),
+                const Text('None'),
+                const SizedBox(
+                  height: 20,
+                ),
                 // 04:20 - 05:20 PM
                 Row(
                   children: [
@@ -267,7 +281,7 @@ class _ManageRequestState extends State<ManageRequest> {
                     )
                   ],
                 ),
-                Text('None'),
+                const Text('None'),
               ])
             ],
           ),

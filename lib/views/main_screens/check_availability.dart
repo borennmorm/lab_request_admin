@@ -43,188 +43,280 @@ class _CheckAvailabilityState extends State<CheckAvailability> {
       ),
       // Drawer
       drawer: const MyDrawer(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Date selection
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Date & actual date
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Date selection
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Date & actual date
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Date',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        formattedDate,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                  // Card of upcoming 7 days
+                  const SizedBox(height: 10),
+                  const SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: WeekView(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              // Lab status section in a single row
+              Row(
+                children: [
+                  Expanded(
+                    child: DropdownButtonFormField<String>(
+                      value: _selectedLab,
+                      hint: const Text(
+                        'Select a lab',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedLab = newValue;
+                        });
+                      },
+                      items: <String>['013', '014', '015']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                        border: InputBorder.none,
+                        filled: true,
+                        fillColor: Colors.transparent,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 90),
+                  // Lab status indicators
+                  const Row(
+                    children: [
+                      Icon(
+                        Icons.square_rounded,
+                        color: Colors.green,
+                        size: 20,
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        'Free',
+                        style: TextStyle(color: Colors.green),
+                      ),
+                      SizedBox(width: 20),
+                      Icon(
+                        Icons.square_rounded,
+                        color: Colors.red,
+                        size: 20,
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        'Busy',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              // First Container
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.pink[100],
+                  border: Border.all(color: Colors.red, width: 2),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Date',
+                    Text(
+                      '07:00 - 08:30 AM',
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Rong Thida',
                       style: TextStyle(
-                        fontSize: 16,
+                        color: Colors.black,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      formattedDate,
-                      style: const TextStyle(fontSize: 16),
-                    ),
                   ],
                 ),
-                // Card of upcoming 7 days
-                const SizedBox(height: 10),
-                const SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: WeekView(),
+              ),
+              const SizedBox(height: 16),
+              // Second Container
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.green[100],
+                  border: Border.all(color: Colors.green, width: 1),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            // Lab status section in a single row
-            Row(
-              children: [
-                Expanded(
-                  child: DropdownButtonFormField<String>(
-                    value: _selectedLab,
-                    hint: const Text(
-                      'Select a lab',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedLab = newValue;
-                      });
-                    },
-                    items: <String>['013', '014', '015']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                      border: InputBorder.none,
-                      filled: true,
-                      fillColor: Colors.transparent,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 90),
-                // Lab status indicators
-                const Row(
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.square_rounded,
-                      color: Colors.green,
-                      size: 20,
-                    ),
-                    SizedBox(width: 5),
                     Text(
-                      'Free',
+                      '07:00 - 08:30 AM',
                       style: TextStyle(color: Colors.green),
                     ),
-                    SizedBox(width: 20),
-                    Icon(
-                      Icons.square_rounded,
-                      color: Colors.red,
-                      size: 20,
-                    ),
-                    SizedBox(width: 5),
+                    SizedBox(height: 8),
                     Text(
-                      'Busy',
-                      style: TextStyle(color: Colors.red),
+                      'Free',
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
-              ],
-            ),
-            // First Container
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.pink[100],
-                border: Border.all(color: Colors.red, width: 2),
-                borderRadius: BorderRadius.circular(8),
               ),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '07:00 - 08:30 AM',
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Rong Thida',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+              const SizedBox(height: 16),
+              // Third Container
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.pink[100],
+                  border: Border.all(color: Colors.red, width: 1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '07:00 - 08:30 AM',
+                      style: TextStyle(color: Colors.red),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            // Second Container
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.green[100],
-                border: Border.all(color: Colors.green, width: 1),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '07:00 - 08:30 AM',
-                    style: TextStyle(color: Colors.green),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Free',
-                    style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                    SizedBox(height: 8),
+                    Text(
+                      'Rong Thida',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            // Third Container
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.pink[100],
-                border: Border.all(color: Colors.red, width: 1),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '07:00 - 08:30 AM',
-                    style: TextStyle(color: Colors.red),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Rong Thida',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+              const SizedBox(height: 16),
+              // Third Container
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.pink[100],
+                  border: Border.all(color: Colors.red, width: 1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '07:00 - 08:30 AM',
+                      style: TextStyle(color: Colors.red),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 8),
+                    Text(
+                      'Rong Thida',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 16),
+              // Third Container
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.pink[100],
+                  border: Border.all(color: Colors.red, width: 1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '07:00 - 08:30 AM',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Rong Thida',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              // Third Container
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.pink[100],
+                  border: Border.all(color: Colors.red, width: 1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '07:00 - 08:30 AM',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Rong Thida',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -243,7 +335,7 @@ class _WeekViewState extends State<WeekView> {
 
   List<Map<String, dynamic>> getDaysOfWeek() {
     DateTime now = DateTime.now();
-    return List.generate(7, (index) {
+    return List.generate(14, (index) {
       DateTime date = now.add(Duration(days: index));
       return {
         "day": DateFormat('EEE').format(date),

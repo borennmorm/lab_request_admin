@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lab_request_admin/views/edit_profile.dart';
 
+import '../views/about_us.dart';
+
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
@@ -44,6 +46,7 @@ class MyDrawer extends StatelessWidget {
             leading: const Icon(Icons.info),
             title: const Text('About Us'),
             onTap: () {
+              Get.to(const About());
             },
           ),
         ],

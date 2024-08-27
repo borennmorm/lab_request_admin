@@ -56,6 +56,16 @@ class EditProfile extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
+            // Password
+            TextField(
+              controller: nameController,
+              decoration: const InputDecoration(
+                labelText: 'Password',
+                hintText: 'New Password',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 10),
             // Save Button
             Row(
               children: [

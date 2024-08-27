@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../components/my_bottom_nav.dart';
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
-import '../main.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});

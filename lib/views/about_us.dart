@@ -8,6 +8,7 @@ class About extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('About Us'),
+        centerTitle: false,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -79,6 +80,7 @@ class About extends StatelessWidget {
             const Text(
               'If you have any questions or require assistance, our support team is here to help.',
             ),
+            const SizedBox(height: 50.0),
           ],
         ),
       ),

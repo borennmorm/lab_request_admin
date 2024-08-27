@@ -12,6 +12,7 @@ class Settings extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
+        centerTitle: false,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),

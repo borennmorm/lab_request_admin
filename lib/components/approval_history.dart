@@ -42,7 +42,8 @@ class ApprovalHistoryCard extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: sessions.map((session) {
                 final isSelected = currentSessions.contains(session);
                 return Padding(

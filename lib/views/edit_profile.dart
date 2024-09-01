@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../components/my_button.dart';
+import 'components/my_button.dart';
 
 class EditProfile extends StatelessWidget {
   const EditProfile({super.key});

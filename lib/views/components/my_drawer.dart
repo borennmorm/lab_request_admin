@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lab_request_admin/views/edit_profile.dart';
 
-import '../views/about_us.dart';
+import '../about_us.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});

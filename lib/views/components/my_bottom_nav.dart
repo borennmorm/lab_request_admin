@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../views/main_screens/announcement.dart';
-import '../views/main_screens/check_availability.dart';
-import '../views/main_screens/home.dart';
-import '../views/main_screens/manage_request.dart';
+import '../main_screens/announcement.dart';
+import '../main_screens/home.dart';
+import '../main_screens/manage_request.dart';
 
 class MyBottomNav extends StatefulWidget {
   const MyBottomNav({super.key});
@@ -16,11 +15,10 @@ class MyBottomNaveState extends State<MyBottomNav> {
   int _selectedIndex = 0;
 
   // List of widgets for each page
-  static const List<Widget> _widgetOptions = <Widget>[
-    Home(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const Home(),
     ManageRequest(),
-    CheckAvailability(),
-    Announcement(),
+    const Announcement(),
   ];
 
   void _onItemTapped(int index) {
@@ -51,13 +49,6 @@ class MyBottomNaveState extends State<MyBottomNav> {
               size: 25,
             ),
             label: 'Requests',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              CupertinoIcons.desktopcomputer,
-              size: 25,
-            ),
-            label: 'Availability',
           ),
           BottomNavigationBarItem(
             icon: Icon(

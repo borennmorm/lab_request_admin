@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../components/my_button.dart';
+import 'components/my_button.dart';
 
 class RequestDetail extends StatefulWidget {
   final String name;

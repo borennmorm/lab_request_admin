@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:lab_request_admin/views/login.dart';
 
-import '../components/my_bottom_nav.dart';
+import 'components/my_bottom_nav.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});

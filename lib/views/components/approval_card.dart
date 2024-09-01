@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../views/request_detail.dart';
+import '../request_detail.dart';
 
 class ApprovalsCard extends StatefulWidget {
   final String name;

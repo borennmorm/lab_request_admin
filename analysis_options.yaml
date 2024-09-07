@@ -5,3 +5,4 @@ analyzer:
     file_names: ignore
     avoid_print: ignore
     dead_code: ignore
+    prefer_const_constructors: ignore

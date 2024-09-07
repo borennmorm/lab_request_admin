@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../main_screens/announcement.dart';
-import '../main_screens/home.dart';
-import '../main_screens/manage_request.dart';
+import '../announcement.dart';
+import '../home_screen.dart';
+import '../manage_request_screen.dart';
 
 class MyBottomNav extends StatefulWidget {
   const MyBottomNav({super.key});

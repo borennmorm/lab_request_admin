@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../components/my_button.dart';
-import '../components/my_drawer.dart';
-import '../settings.dart';
+import 'components/my_button.dart';
+import 'components/my_drawer.dart';
+import 'settings.dart';
 
 class Announcement extends StatefulWidget {
   const Announcement({super.key});

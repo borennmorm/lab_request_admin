@@ -24,10 +24,10 @@ class _SplashState extends State<Splash> {
 
       if (userLoggedIn) {
         // Navigate to HomePage
-        Get.offAll(const MyBottomNav());
+        Get.offAll(() => const MyBottomNav());
       } else {
         // Navigate to LoginPage
-        Get.offAll(const Login());
+        Get.offAll(() => const Login());
       }
     });
   }

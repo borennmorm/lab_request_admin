@@ -66,7 +66,7 @@ class Login extends StatelessWidget {
                       color: Colors.black,
                       onPressed: () {
                         Get.offAll(
-                          const MyBottomNav(),
+                          () => const MyBottomNav(),
                         );
                       },
                       text: 'Login',
@@ -75,19 +75,19 @@ class Login extends StatelessWidget {
                 ],
               ),
 
-              const Spacer(),
-              // Don't have an Account yet? Contact Dev
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text("Don't have an account yet?",
-                    style: TextStyle(color: Colors.grey[600])),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Contact',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ])
+              // const Spacer(),
+              // // Don't have an Account yet? Contact Dev
+              // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              //   Text("Don't have an account yet?",
+              //       style: TextStyle(color: Colors.grey[600])),
+              //   TextButton(
+              //     onPressed: () {},
+              //     child: const Text(
+              //       'Contact',
+              //       style: TextStyle(color: Colors.black),
+              //     ),
+              //   ),
+              // ])
             ],
           ),
         ),

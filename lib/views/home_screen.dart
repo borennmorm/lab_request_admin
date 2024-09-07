@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../components/my_drawer.dart';
-import '../settings.dart';
+import '../controllers/controller.dart';
+import 'components/my_drawer.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -13,6 +13,23 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final Controller controller = Get.put(Controller());
+
+  @override
+  void initState() {
+    super.initState();
+    updateOverview();
+  }
+
+  void updateOverview() {
+    // Update the overview data based on the current requests
+    controller.totalRequests.value = controller.getTotalRequestsForToday();
+    controller.pendingApprovals.value = controller.getTotalPendingRequests();
+    controller.approvedRequests.value =
+        controller.getTotalApprovedRequestsForToday();
+    controller.rejectedRequests.value =
+        controller.getTotalRejectedRequestsForToday();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +44,6 @@ class _HomeState extends State<Home> {
         ),
         title: const Text('Dashboard'),
         centerTitle: false,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.to(const Settings());
-            },
-            icon: const Icon(Icons.settings),
-          ),
-        ],
       ),
       drawer: const MyDrawer(),
       body: SingleChildScrollView(
@@ -55,18 +64,22 @@ class _HomeState extends State<Home> {
                 children: [
                   // Use Expanded to equally distribute space in the row
                   Expanded(
-                    child: OverviewCard(
-                      title: 'Total Request',
-                      number: '05',
-                      color: Colors.green[700]!,
+                    child: Obx(
+                      () => OverviewCard(
+                        title: 'Total Request',
+                        number: controller.totalRequests.toString(),
+                        color: Colors.green[700]!,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 5),
                   Expanded(
-                    child: OverviewCard(
-                      title: 'Pending ',
-                      number: '05',
-                      color: Colors.red[700]!,
+                    child: Obx(
+                      () => OverviewCard(
+                        title: 'Pending',
+                        number: controller.pendingApprovals.toString(),
+                        color: Colors.red[700]!,
+                      ),
                     ),
                   ),
                 ],
@@ -76,18 +89,22 @@ class _HomeState extends State<Home> {
                 children: [
                   // Use Expanded to equally distribute space in the row
                   Expanded(
-                    child: OverviewCard(
-                      title: 'Approve',
-                      number: '05',
-                      color: Colors.blue[700]!,
+                    child: Obx(
+                      () => OverviewCard(
+                        title: 'Approve',
+                        number: controller.approvedRequests.toString(),
+                        color: Colors.blue[700]!,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 5),
                   Expanded(
-                    child: OverviewCard(
-                      title: 'Reject',
-                      number: '05',
-                      color: Colors.orange[700]!,
+                    child: Obx(
+                      () => OverviewCard(
+                        title: 'Reject',
+                        number: controller.rejectedRequests.toString(),
+                        color: Colors.orange[700]!,
+                      ),
                     ),
                   ),
                 ],
